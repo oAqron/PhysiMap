@@ -53,21 +53,53 @@ PhysiMap V0 prioritizes:
 ## Repository layout
 > Keep this in sync as the repo evolves.
 
-apps/
-mobile/ # React Native app (UI)
-services/
-api/ # FastAPI backend
-physimap/ # core package
-core/ # deterministic bias engine
-goals/ # goal modules (V0: broader shoulders)
-llm/ # explanation layer + prompts + guards
-routes/ # API endpoints
-schemas/ # Pydantic models
-tests/ # backend tests
-docs/
-architecture.md
-bias-engine.md
-llm-guardrails.md
+physimap/
+  README.md
+  LICENSE
+  .gitignore
+  .editorconfig
+  .gitattributes
+
+  docs/
+    architecture.md
+    bias-engine.md
+    llm-guardrails.md
+
+  apps/
+    mobile/
+      README.md
+      app.json
+      package.json
+      src/
+        app/
+        components/
+        screens/
+        api/
+      assets/
+
+  services/
+    api/
+      README.md
+      pyproject.toml            # preferred (or requirements.txt)
+      .env.example
+      physimap/
+        __init__.py
+        main.py                  # FastAPI app entry
+        routes/
+        schemas/
+        core/                    # deterministic bias engine
+        goals/                   # V0: broader shoulders
+        llm/                     # explanation layer + prompts + guards
+      tests/
+
+  .github/
+    workflows/
+      ci.yml                     # lint + tests
+    ISSUE_TEMPLATE/
+      bug_report.md
+      feature_request.md
+    PULL_REQUEST_TEMPLATE.md
+
 
 ---
 

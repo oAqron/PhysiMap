@@ -61,7 +61,7 @@ DerivedData/
 # Metro / RN tooling
 .metro-cache/
 .react-native/
-npmrc
+.npmrc
 .yarnrc
 .pnp.*
 .yarn/

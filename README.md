@@ -100,7 +100,7 @@ This is currently a solo-developer, learning-driven project.
 ---
 
 ## License
-TBD (MIT / Apache-2.0 / GPL-3.0)
+MIT
 
 ---
 

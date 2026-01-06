@@ -64,13 +64,13 @@ physimap/
   .gitignore
   .editorconfig
   .gitattributes
-
   apps/
   mobile/ # Expo React Native app (UI only)
   services/
   api/ # FastAPI backend (logic + API + explanation layer)
   docs/ # Architecture, bias engine notes, LLM guardrails, dev setup
   .github/ # CI + templates
+
 ---
 
 ## Quickstart (local dev)

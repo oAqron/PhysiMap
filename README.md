@@ -1,8 +1,11 @@
 # PhysiMap (V0)
 
-AI-assisted physique analysis that identifies over-/under-emphasized muscle groups and recommends training bias adjustments using **deterministic, explainable logic**. An LLM is used **only** to explain and personalize the output (never to decide it).
+PhysiMap is an AI-assisted physique analysis tool that helps lifters identify over- and under-emphasized muscle groups and adjust training bias to align with aesthetic goals.
 
-> Status: V0 — intentionally minimal, testable, and credibility-first.
+V0 is intentionally minimal and credibility-first:
+- Deterministic, explainable bias engine is the source of truth
+- LLM is server-side only and used only for explanation/personalization (never for decisions)
+- No hype, no coach-replacement claims
 
 ---
 
@@ -32,18 +35,20 @@ PhysiMap V0 prioritizes:
 
 ---
 
-## How it works (at a glance)
-1. User selects a goal and provides basic inputs (V0: non-image, observation-based inputs)
-2. **Deterministic engine** maps inputs → muscle emphasis signals
-3. Engine outputs bias guidance (what to emphasize / de-emphasize + why)
-4. **(Optional)** LLM converts the engine output into clearer explanations and personalized wording
+## How it works (high-level)
+1. User provides inputs in the mobile app (V0: simple observation-based inputs)
+2. Backend deterministic engine produces:
+   - muscle emphasis signals
+   - bias recommendation (what to emphasize / de-emphasize)
+   - traceable reasoning
+3. Optional LLM layer turns the deterministic result into clearer, personalized language
 
-> Source of truth = deterministic engine. The LLM does not change decisions.
+Deterministic engine remains the source of truth.
 
 ---
 
 ## Architecture
-- **React Native mobile app**: UI only (inputs + results display)
+- **Expo React Native mobile app**: UI only (inputs + results display)
 - **Python + FastAPI backend**: logic + API + explanation layer
 - **Deterministic bias engine**: transparent rules + explicit data structures
 - **LLM layer**: explanation/personalization only, with guardrails
@@ -60,127 +65,37 @@ physimap/
   .editorconfig
   .gitattributes
 
-  docs/
-    architecture.md
-    bias-engine.md
-    llm-guardrails.md
-
   apps/
-    mobile/
-      README.md
-      app.json
-      package.json
-      src/
-        app/
-        components/
-        screens/
-        api/
-      assets/
-
+  mobile/ # Expo React Native app (UI only)
   services/
-    api/
-      README.md
-      pyproject.toml            # preferred (or requirements.txt)
-      .env.example
-      physimap/
-        __init__.py
-        main.py                  # FastAPI app entry
-        routes/
-        schemas/
-        core/                    # deterministic bias engine
-        goals/                   # V0: broader shoulders
-        llm/                     # explanation layer + prompts + guards
-      tests/
-
-  .github/
-    workflows/
-      ci.yml                     # lint + tests
-    ISSUE_TEMPLATE/
-      bug_report.md
-      feature_request.md
-    PULL_REQUEST_TEMPLATE.md
-
-
+  api/ # FastAPI backend (logic + API + explanation layer)
+  docs/ # Architecture, bias engine notes, LLM guardrails, dev setup
+  .github/ # CI + templates
 ---
 
-## Quickstart
+## Quickstart (local dev)
+See subproject READMEs for exact steps:
+- Mobile: `apps/mobile/README.md`
+- API: `services/api/README.md`
 
-### Prerequisites
-- Python 3.11+ (backend)
-- Node.js 18+ (mobile)
-- (Optional) LLM API key (only needed for explanation endpoints)
+Key networking note for Android Emulator:
+- Emulator cannot reach your host API via `localhost`
+- Use `http://10.0.2.2:<PORT>` instead  
+Docs: `docs/dev-setup.md`
 
-### Run backend (FastAPI)
-See: `services/api/README.md`
-
-### Run mobile app (React Native)
-See: `apps/mobile/README.md`
-
----
-
-## API overview (V0)
-Typical endpoints:
-- `POST /v0/analyze` — deterministic analysis output (no LLM)
-- `POST /v0/explain` — explanation layer output (LLM optional)
-
-> Once schemas stabilize, add a small request/response example here.
-
----
-
-## Deterministic bias engine (explainable core)
-PhysiMap’s recommendations come from explicit rules:
-- Inputs → signals per muscle group
-- Goal module defines target aesthetic bias (V0: broader shoulders)
-- Output is traceable (which signals triggered and why)
-
-Docs:
-- `docs/bias-engine.md`
-
----
-
-## Responsible LLM integration
-LLM is used only to:
-- explain the deterministic output in plain language
-- adjust tone/detail level based on user preference
-
-LLM is not allowed to:
-- override deterministic outputs
-- invent measurements or pretend it “saw” data it didn’t
-- provide medical advice
-
-Docs:
-- `docs/llm-guardrails.md`
-
----
-
-## Testing & quality
-Backend tests live in: `services/api/tests`
-
-Code principles:
-- deterministic first, AI second
-- small functions + explicit data structures
-- recommendations must be traceable to rules/signals
-
----
-
-## Privacy & safety notes
-PhysiMap V0 is designed to minimize sensitive data handling.
-If image inputs are introduced later, the repo will document storage, retention, and consent.
-
-PhysiMap is an educational tool and does not replace professional coaching or medical guidance.
-
----
-
-## Roadmap (small, credible steps)
-- V0.x: stabilize schemas, increase rule coverage, add tests, improve UI copy
-- V1: additional goal modules (deterministic-first)
-- Future: consider image-based inputs only if privacy + explainability standards are met
+## Documentation index
+- `docs/architecture.md` — architecture and boundaries
+- `docs/bias-engine.md` — deterministic engine rules/signals (traceability)
+- `docs/llm-guardrails.md` — LLM constraints and safety
+- `docs/dev-setup.md` — Android Emulator ↔ local API networking
 
 ---
 
 ## Contributing
 This is currently a solo-developer, learning-driven project.
-Please open an Issue before making major changes.
+- Keep PRs small and scoped
+- Do not add features that change the locked architecture or V0 scope without an Issue first
+- Never commit secrets (use `.env` locally and commit `.env.example` only)
 
 ---
 

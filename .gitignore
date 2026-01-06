@@ -65,6 +65,8 @@ DerivedData/
 .yarnrc
 .pnp.*
 .yarn/
+.eslintcache
+*.tsbuildinfo
 
 # =========================
 # OS junk

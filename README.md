@@ -1,13 +1,6 @@
-# PhysiMap (V0)
+# PhysiMap
 
 PhysiMap is an AI-assisted physique analysis tool that helps lifters identify over- and under-emphasized muscle groups and adjust training bias to align with aesthetic goals.
-
-V0 is intentionally minimal and credibility-first:
-- Deterministic, explainable bias engine is the source of truth
-- LLM is server-side only and used only for explanation/personalization (never for decisions)
-- No hype, no coach-replacement claims
-
----
 
 ## Why this exists
 Most fitness tools either:

@@ -11,39 +11,26 @@ V0 is intentionally minimal and credibility-first:
 
 ## Why this exists
 Most fitness tools either:
-- provide generic advice with no transparency, or
-- rely on “AI” without showing the logic.
+- provide generic advice with no transparency
 
 PhysiMap V0 prioritizes:
 - **explainable sports-science logic**
 - **responsible, bounded LLM usage**
-- **clarity over hype**
 
 ---
 
-## What PhysiMap V0 does
-- Supports **one goal module**: **Broader shoulders**
+## What PhysiMap does
+- Tailored for ONE specific desired outcomes, e.g: **Broader shoulders**
 - Runs a **deterministic bias engine** to flag over-/under-emphasized areas
-- Produces an **explainable** recommendation (signals + reasoning)
-- Optionally generates a **user-friendly explanation** using an LLM (tone + clarity)
+- Produces an **explainable** recommendation and generates a **user-friendly explanation** via OpenAI API
 
-## What PhysiMap V0 does NOT do (by design)
-- No workout logging
-- No full program generation or periodization
-- No “coach replacement” claims
-- No medical / injury advice
 
----
-
-## How it works (high-level)
-1. User provides inputs in the mobile app (V0: simple observation-based inputs)
+## How it works 
+1. User provides inputs in the mobile app (MCQ Survey)
 2. Backend deterministic engine produces:
    - muscle emphasis signals
    - bias recommendation (what to emphasize / de-emphasize)
    - traceable reasoning
-3. Optional LLM layer turns the deterministic result into clearer, personalized language
-
-Deterministic engine remains the source of truth.
 
 ---
 
@@ -91,11 +78,8 @@ Docs: `docs/dev-setup.md`
 
 ---
 
-## Contributing
+## Purpose
 This is currently a solo-developer, learning-driven project.
-- Keep PRs small and scoped
-- Do not add features that change the locked architecture or V0 scope without an Issue first
-- Never commit secrets (use `.env` locally and commit `.env.example` only)
 
 ---
 
